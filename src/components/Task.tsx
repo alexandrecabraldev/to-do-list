@@ -24,7 +24,6 @@ const TaskContainer = styled.div`
         flex: 1;
     }
 
-
 `;
 
 
