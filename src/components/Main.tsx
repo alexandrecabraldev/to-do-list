@@ -75,10 +75,14 @@ export function Main(){
         event.preventDefault();
         setTaskList([...taskList, text]);
         setText("");
-        console.log(taskList);
     }
 
-    console.log(text);
+    function deleteTask(task: String){
+
+        let newListWhithoutDeleted = taskList.filter(comment=>comment!=task);
+        setTaskList(newListWhithoutDeleted);
+        console.log(taskList);
+    }
 
 
     return(
@@ -93,7 +97,7 @@ export function Main(){
                 
 
                 <HeaderTask countTask={taskList.length}/>
-                {taskList.map(comment=> <Task comment={comment}/>)}
+                {taskList.map(comment=> <Task comment={comment} deleteTask={deleteTask}/>)}
                 
             </form>
         </FormContainer>

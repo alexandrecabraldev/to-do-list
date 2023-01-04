@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Circle, Trash} from "phosphor-react";
+import {Circle, Trash, CheckCircle} from "phosphor-react";
 
 const TaskContainer = styled.div`
     display: flex;
@@ -29,14 +29,24 @@ const TaskContainer = styled.div`
 
 
 export function Task(props:any){
+
+    function handleDelete(){
+        props.deleteTask(props.comment);
+    }
+
+    function handleCheck(){
+
+    }
+
     return(
         <TaskContainer>
             <div>
-                <Circle size={20} color="#4EA8DE"/>
+                 <CheckCircle size={20} color="#8284FA" />
+                <Circle size={20} color="#4EA8DE" onClick={handleCheck}/>
             </div>
                 <span>{props.comment}</span>
             <div>
-                <Trash size={20} color="#808080"/>
+                <Trash size={20} color="#808080" onClick={handleDelete}/>
             </div>
         </TaskContainer>
     );
