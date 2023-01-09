@@ -2,7 +2,7 @@ import styled from "styled-components"
 import {PlusCircle} from "phosphor-react";
 import { HeaderTask } from "./HeaderTask";
 import { Task } from "./Task";
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 const FormContainer = styled.main`
     width: 46rem;
@@ -67,7 +67,7 @@ export function Main(){
     const [taskList, setTaskList] = useState<String[]>([]);
     const [text, setText] = useState("");
 
-    function handleWrite(event: React.ChangeEvent<HTMLInputElement>){
+    function handleWrite(event: ChangeEvent<HTMLInputElement>){
         setText(event.target.value);
     }
 

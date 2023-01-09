@@ -26,9 +26,12 @@ const TaskContainer = styled.div`
 
 `;
 
+interface TypeProps {
+    comment: String,
+    deleteTask: Function
+}
 
-
-export function Task(props:any){
+export function Task(props:TypeProps){
 
     function handleDelete(){
         props.deleteTask(props.comment);
