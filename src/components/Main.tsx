@@ -60,8 +60,6 @@ const TextInput = styled.input`
 `;
 
 
-
-
 export function Main(){
 
     const [taskList, setTaskList] = useState<String[]>([]);
