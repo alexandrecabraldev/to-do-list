@@ -27,8 +27,8 @@ const TaskContainer = styled.div`
 `;
 
 interface TypeProps {
-    comment: String,
-    deleteTask: Function
+    comment: String;
+    deleteTask: (task: String)=>void;
 }
 
 export function Task(props:TypeProps){

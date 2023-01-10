@@ -81,7 +81,7 @@ export function Main(){
 
         let newListWhithoutDeleted = taskList.filter(comment=>comment!=task);
         setTaskList(newListWhithoutDeleted);
-        console.log(taskList);
+        console.log(newListWhithoutDeleted);
     }
 
 
