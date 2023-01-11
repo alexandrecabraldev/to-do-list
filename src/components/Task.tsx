@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {Circle, Trash, CheckCircle} from "phosphor-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const TaskContainer = styled.div`
     display: flex;
@@ -33,22 +33,38 @@ interface TypeProps {
 
 export function Task(props:TypeProps){
 
-    const lineThrough = useRef<HTMLDivElement>(); 
+    const lineThrough = useRef<HTMLDivElement>();
+
+    let isCheckEnable: Boolean = false;  
 
     function handleDelete(){
         props.deleteTask(props.comment);
     }
 
     function handleCheck(){
-        lineThrough.current!.style.textDecoration = "line-through";
-        console.log(lineThrough.current);
+
+        isCheckEnable = !isCheckEnable;
+
+        if(isCheckEnable){
+            lineThrough.current!.style.textDecoration = "line-through";
+        }else{
+            lineThrough.current!.style.textDecoration = "none";
+        }
+
+        console.log(isCheckEnable);
+        
     }
 
     return(
         <TaskContainer>
             <div>
-                 <CheckCircle size={20} color="#8284FA"/>
-                 <Circle size={20} color="#4EA8DE" onClick={handleCheck}/>
+
+                {   
+                    
+                    (isCheckEnable)?<CheckCircle size={20} color="#8284FA" onClick={handleCheck}/>:<Circle size={20} color="#4EA8DE" onClick={handleCheck}/>
+                    
+                }
+                 
             </div>
 
                 <span ref={lineThrough}>{props.comment}</span>
