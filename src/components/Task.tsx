@@ -35,7 +35,7 @@ export function Task(props:TypeProps){
 
     const lineThrough = useRef<HTMLDivElement>();
 
-    let isCheckEnable: Boolean = false;  
+    const [isCheckEnable, setIsCheckEnable] = useState(false)  
 
     function handleDelete(){
         props.deleteTask(props.comment);
@@ -43,9 +43,9 @@ export function Task(props:TypeProps){
 
     function handleCheck(){
 
-        isCheckEnable = !isCheckEnable;
+        setIsCheckEnable(state=>!state);
 
-        if(isCheckEnable){
+        if(!isCheckEnable){
             lineThrough.current!.style.textDecoration = "line-through";
         }else{
             lineThrough.current!.style.textDecoration = "none";
@@ -61,7 +61,7 @@ export function Task(props:TypeProps){
 
                 {   
                     
-                    (isCheckEnable)?<CheckCircle size={20} color="#8284FA" onClick={handleCheck}/>:<Circle size={20} color="#4EA8DE" onClick={handleCheck}/>
+                    isCheckEnable ? (<CheckCircle size={20} color="#8284FA" onClick={handleCheck}/>) : (<Circle size={20} color="#4EA8DE" onClick={handleCheck}/>)
                     
                 }
                  
