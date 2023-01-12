@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {Circle, Trash, CheckCircle} from "phosphor-react";
 import { useRef, useState } from "react";
+import {TaskObject} from "./Main"
 
 const TaskContainer = styled.div`
     display: flex;
@@ -17,6 +18,7 @@ const TaskContainer = styled.div`
     div{
         cursor: pointer;
         height: 0;
+
     }
 
     span{
@@ -28,13 +30,14 @@ const TaskContainer = styled.div`
 
 interface TypeProps {
     comment: String;
+    objectTask: TaskObject;
     deleteTask: (task: String)=>void;
     
 }
 
 export function Task(props:TypeProps){
 
-    const lineThrough = useRef<HTMLDivElement>();
+    const lineThrough = useRef<HTMLSpanElement>(null);
 
     const [isCheckEnable, setIsCheckEnable] = useState(false)  
 
@@ -45,6 +48,15 @@ export function Task(props:TypeProps){
     function handleCheck(){
 
         setIsCheckEnable(state=>!state);
+        props.objectTask.done=!props.objectTask.done;
+
+        /**
+         * if(props.objectTask.done ==="true"){
+         *  counter++;
+         * }else{
+         * counter--;
+         * }
+         */
 
         if(!isCheckEnable){
             lineThrough.current!.style.textDecoration = "line-through";

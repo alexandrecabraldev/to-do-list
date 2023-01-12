@@ -2,6 +2,7 @@ import styled from "styled-components"
 import {PlusCircle} from "phosphor-react";
 import { HeaderTask } from "./HeaderTask";
 import { Task } from "./Task";
+import {TaskEmpty} from "./TaskEmpty"
 import { ChangeEvent, FormEvent, useState } from "react";
 
 const FormContainer = styled.main`
@@ -59,13 +60,14 @@ const TextInput = styled.input`
     
 `;
 
-class TaskObject{
+export class TaskObject{
     constructor(comment:String, keyValue:String){
         this.comment =comment;
         this.keyValue = keyValue;
     }
 
     comment:String;
+    done:Boolean = false;
     keyValue:String;
 }
 
@@ -108,7 +110,8 @@ export function Main(){
                 
 
                 <HeaderTask countTask={taskList.length}/>
-                {taskList.map((element, key)=> <Task key={key} comment={element.comment} deleteTask={deleteTask}/>)}
+                {taskList.length===0 && <TaskEmpty/>}
+                {taskList.map((element, key)=> <Task key={key} comment={element.comment} deleteTask={deleteTask} objectTask={element}/>)}
                 
             </form>
         </FormContainer>

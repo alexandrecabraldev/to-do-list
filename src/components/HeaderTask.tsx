@@ -7,9 +7,7 @@ const HeaderTaskContainer = styled.div`
     font-weight: 700;
     margin-bottom: 1.5rem;
 
-    span:nth-child(1){
-        color: ${props=>props.theme.blue};
-
+    span{
         div{
             display: inline;
             margin-left: 0.5rem;
@@ -19,11 +17,14 @@ const HeaderTaskContainer = styled.div`
             border-radius: 8px;
             font-size: 0.75rem;
         }
+    }
 
+    span:nth-child(1){
+        color: ${props=>props.theme.blue};
     }
 
     span:nth-child(2){
-        color: ${props=>props.theme.purple};
+        color: ${props=>props.theme.purple};   
     }
 
 `;
@@ -35,7 +36,9 @@ export function HeaderTask(props: any){
                 <div>{props.countTask}</div>
             </span>
 
-            <span>Concluídas</span>
+            <span>Concluídas
+                <div>{`count de ${props.countTask}`}</div>
+            </span>
         </HeaderTaskContainer>
     );
 }
