@@ -59,10 +59,19 @@ const TextInput = styled.input`
     
 `;
 
+class TaskObject{
+    constructor(comment:String, keyValue:String){
+        this.comment =comment;
+        this.keyValue = keyValue;
+    }
+
+    comment:String;
+    keyValue:String;
+}
 
 export function Main(){
 
-    const [taskList, setTaskList] = useState<String[]>([]);
+    const [taskList, setTaskList] = useState<TaskObject[]>([]);
     const [text, setText] = useState("");
 
     function handleWrite(event: ChangeEvent<HTMLInputElement>){
@@ -71,13 +80,17 @@ export function Main(){
 
     function handleSubmit(event: FormEvent){
         event.preventDefault();
-        setTaskList(state=>[...state, text]);
+
+        const dateInMilliseconds = new Date().getTime().toString();
+
+        setTaskList(state=>[...state, new TaskObject(text, dateInMilliseconds)]);
+        console.log(dateInMilliseconds);
         setText("");
     }
 
     function deleteTask(task: String){
 
-        let newListWhithoutDeleted = taskList.filter(comment=>comment!=task);
+        let newListWhithoutDeleted = taskList.filter(element=>element.comment!=task);
         setTaskList(newListWhithoutDeleted);
         console.log(newListWhithoutDeleted);
     }
@@ -95,7 +108,7 @@ export function Main(){
                 
 
                 <HeaderTask countTask={taskList.length}/>
-                {taskList.map(comment=> <Task comment={comment} deleteTask={deleteTask}/>)}
+                {taskList.map((element, key)=> <Task key={key} comment={element.comment} deleteTask={deleteTask}/>)}
                 
             </form>
         </FormContainer>
