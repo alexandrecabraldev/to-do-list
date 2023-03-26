@@ -3,7 +3,9 @@ import {PlusCircle} from "phosphor-react";
 import { HeaderTask } from "./HeaderTask";
 import { Task } from "./Task";
 import {TaskEmpty} from "./TaskEmpty"
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState, useContext } from "react";
+import { ContextList } from "../context/ContextList";
+
 
 const FormContainer = styled.main`
     width: 46rem;
@@ -75,10 +77,21 @@ export function Main(){
 
     const [taskList, setTaskList] = useState<TaskObject[]>([]);
     const [text, setText] = useState("");
+    const [countTaskDone, setCountTaskDone] = useState(0);
+    let countSuport =0;
+
+     function countDoneTask(countTask:number){
+        setCountTaskDone(value=>value+countTask);
+        countSuport=countTaskDone+ countTask;
+        console.log(countSuport);
+      
+    }
+
 
     function handleWrite(event: ChangeEvent<HTMLInputElement>){
         setText(event.target.value);
     }
+    
 
     function handleSubmit(event: FormEvent){
         event.preventDefault();
@@ -99,21 +112,24 @@ export function Main(){
 
 
     return(
-        <FormContainer>
-            <form action="" onSubmit={handleSubmit}>   
-                <ContainerInputButton>
+         //<ContextList.Provider value={{ countTaskDone, setCountTaskDone }}>
+            <FormContainer>
+                <form action="" onSubmit={handleSubmit}>   
+                    <ContainerInputButton>
 
-                    <TextInput title="createTask" type="text" placeholder="Adicione uma nova tarefa" onChange={handleWrite} value={text} required/>
-                    <button title="button" type="submit">Criar <PlusCircle size={20} /> </button>
+                        <TextInput title="createTask" type="text" placeholder="Adicione uma nova tarefa" onChange={handleWrite} value={text} required/>
+                        <button title="button" type="submit">Criar <PlusCircle size={20} /> </button>
+                        
+                    </ContainerInputButton>
                     
-                </ContainerInputButton>
-                
 
-                <HeaderTask countTask={taskList.length}/>
-                {taskList.length===0 && <TaskEmpty/>}
-                {taskList.map((element, key)=> <Task key={key} comment={element.comment} deleteTask={deleteTask} objectTask={element}/>)}
-                
-            </form>
-        </FormContainer>
+                    <HeaderTask countTask={taskList.length} paramCountTaskDone={countTaskDone}/>
+                    {taskList.length===0 && <TaskEmpty/>}
+                    {taskList.map((element, key)=> <Task key={key} comment={element.comment} deleteTask={deleteTask} objectTask={element} onCountDoneTask={countDoneTask}/>)}
+                    
+                </form>
+            </FormContainer>
+       //</ContextList.Provider> 
+      
     )
 }

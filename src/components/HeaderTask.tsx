@@ -37,7 +37,7 @@ export function HeaderTask(props: any){
             </span>
 
             <span>Concluídas
-                <div>{`count de ${props.countTask}`}</div>
+                <div>{`${props.paramCountTaskDone} de ${props.countTask}`}</div>
             </span>
         </HeaderTaskContainer>
     );
