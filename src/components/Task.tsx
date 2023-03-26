@@ -38,8 +38,8 @@ interface TypeProps {
 export function Task(props:TypeProps){
 
     const lineThrough = useRef<HTMLSpanElement>(null);
-
-    const [isCheckEnable, setIsCheckEnable] = useState(false)  
+    const [isCheckEnable, setIsCheckEnable] = useState(false);
+    let countTaskDone:number =0;
 
     function handleDelete(){
         props.deleteTask(props.comment);
@@ -50,13 +50,13 @@ export function Task(props:TypeProps){
         setIsCheckEnable(state=>!state);
         props.objectTask.done=!props.objectTask.done;
 
-        /**
-         * if(props.objectTask.done ==="true"){
-         *  counter++;
-         * }else{
-         * counter--;
-         * }
-         */
+      
+        if(props.objectTask.done === true){
+            ++countTaskDone;
+        }else{
+            --countTaskDone;
+        }
+         
 
         if(!isCheckEnable){
             lineThrough.current!.style.textDecoration = "line-through";
@@ -65,6 +65,7 @@ export function Task(props:TypeProps){
         }
 
         console.log(isCheckEnable);
+        console.log(countTaskDone)
         
     }
 
