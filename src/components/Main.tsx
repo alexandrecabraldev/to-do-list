@@ -68,8 +68,8 @@ export class TaskObject{
         this.keyValue = keyValue;
     }
 
-    comment:String;
-    done:Boolean = false;
+    comment:string;
+    done:boolean = false;
     keyValue:string;
 }
 
@@ -105,14 +105,14 @@ export function Main(){
 
     function deleteTask(task: string){
 
-        let newListWhithoutDeleted = taskList.filter(element=>element.keyValue!=task);
+        let newListWhithoutDeleted = taskList.filter(element=>element.keyValue!==task);
         setTaskList(newListWhithoutDeleted);
         console.log(newListWhithoutDeleted);
     }
 
 
     return(
-         //<ContextList.Provider value={{ countTaskDone, setCountTaskDone }}>
+         <ContextList.Provider value={{ taskList, setTaskList }}>
             <FormContainer>
                 <form action="" onSubmit={handleSubmit}>   
                     <ContainerInputButton>
@@ -125,11 +125,12 @@ export function Main(){
 
                     <HeaderTask countTask={taskList.length} paramCountTaskDone={countTaskDone}/>
                     {taskList.length===0 && <TaskEmpty/>}
-                    {taskList.map((element, key)=> <Task key={key} keyValue={element.keyValue} comment={element.comment} deleteTask={deleteTask} objectTask={element} onCountDoneTask={countDoneTask}/>)}
+                    {taskList.map((element, key)=> <Task key={key} keyValue={element.keyValue} comment={element.comment} deleteTask={deleteTask} objectTask={element} 
+                    onCountDoneTask={countDoneTask}/>)}
                     
                 </form>
             </FormContainer>
-       //</ContextList.Provider> 
+       </ContextList.Provider> 
       
     )
 }
