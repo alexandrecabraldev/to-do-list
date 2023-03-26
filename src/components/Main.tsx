@@ -63,14 +63,14 @@ const TextInput = styled.input`
 `;
 
 export class TaskObject{
-    constructor(comment:String, keyValue:String){
+    constructor(comment:string, keyValue:string){
         this.comment =comment;
         this.keyValue = keyValue;
     }
 
     comment:String;
     done:Boolean = false;
-    keyValue:String;
+    keyValue:string;
 }
 
 export function Main(){
@@ -103,9 +103,9 @@ export function Main(){
         setText("");
     }
 
-    function deleteTask(task: String){
+    function deleteTask(task: string){
 
-        let newListWhithoutDeleted = taskList.filter(element=>element.comment!=task);
+        let newListWhithoutDeleted = taskList.filter(element=>element.keyValue!=task);
         setTaskList(newListWhithoutDeleted);
         console.log(newListWhithoutDeleted);
     }
@@ -125,7 +125,7 @@ export function Main(){
 
                     <HeaderTask countTask={taskList.length} paramCountTaskDone={countTaskDone}/>
                     {taskList.length===0 && <TaskEmpty/>}
-                    {taskList.map((element, key)=> <Task key={key} comment={element.comment} deleteTask={deleteTask} objectTask={element} onCountDoneTask={countDoneTask}/>)}
+                    {taskList.map((element, key)=> <Task key={key} keyValue={element.keyValue} comment={element.comment} deleteTask={deleteTask} objectTask={element} onCountDoneTask={countDoneTask}/>)}
                     
                 </form>
             </FormContainer>

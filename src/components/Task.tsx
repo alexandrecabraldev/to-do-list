@@ -7,7 +7,7 @@ const TaskContainer = styled.div`
     display: flex;
     gap: 0.75rem;
     flex: 1;
-    //text-decoration: line-through;
+    //text-decoration: ${(true) ? "line-through" : "none"};
 
     padding: 1rem 0.75rem;
     margin-bottom: 0.75rem;
@@ -31,8 +31,9 @@ const TaskContainer = styled.div`
 interface TypeProps {
     comment: String;
     objectTask: TaskObject;
-    deleteTask: (task: String)=>void;
+    deleteTask: (task: string)=>void;
     onCountDoneTask:(countTask:number)=>void;
+    keyValue:string;
     
 }
 
@@ -41,28 +42,26 @@ export function Task(props:TypeProps){
     const lineThrough = useRef<HTMLSpanElement>(null);
     const [isCheckEnable, setIsCheckEnable] = useState(false);
     const [countTaskDone, setCountTaskDone] = useState(0);
-    //const [countDone, setCountDone]=useState(0);
+
     let countTaskDoneSuport = 0;
 
+
     function handleDelete(){
-        props.deleteTask(props.comment);
+        props.deleteTask(props.keyValue);
+
+        if(isCheckEnable){
+            setCountTaskDone(value=>value-1);
+            countTaskDoneSuport--;
+            props.onCountDoneTask(countTaskDoneSuport);
+        }
     }
 
-    
 
     function handleCheck(){
 
         setIsCheckEnable(state=>!state);
         //props.objectTask.done=!props.objectTask.done;
-
-      
-        // if(props.objectTask.done === true){
-        //     setCountTaskDone(value=>value+1)
-        // }else{
-        //     setCountTaskDone(value=>value-1)
-        // }
          
-
         if(!isCheckEnable){
             lineThrough.current!.style.textDecoration = "line-through";
             setCountTaskDone(value=>value+1);
