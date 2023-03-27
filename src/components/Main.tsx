@@ -3,8 +3,7 @@ import {PlusCircle} from "phosphor-react";
 import { HeaderTask } from "./HeaderTask";
 import { Task } from "./Task";
 import {TaskEmpty} from "./TaskEmpty"
-import { ChangeEvent, FormEvent, useState, useContext } from "react";
-import { ContextList } from "../context/ContextList";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 
 const FormContainer = styled.main`
@@ -112,7 +111,7 @@ export function Main(){
 
 
     return(
-         <ContextList.Provider value={{ taskList, setTaskList }}>
+    
             <FormContainer>
                 <form action="" onSubmit={handleSubmit}>   
                     <ContainerInputButton>
@@ -130,7 +129,6 @@ export function Main(){
                     
                 </form>
             </FormContainer>
-       </ContextList.Provider> 
       
     )
 }
